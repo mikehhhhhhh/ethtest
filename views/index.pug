@@ -1,0 +1,15 @@
+html
+	head
+		title="JS Test"
+	body
+		h1="Eth Balance"
+		form(name="eth-balance", method="post")
+			div.row
+				label Address: 
+				input(type="text",name="address",value=address)
+				input(type="submit",name="Submit")
+		if error
+			span(style="color:red") #{error}
+		if typeof balance !== 'undefined'
+			p
+				span Balance: #{balance} ETH
