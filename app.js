@@ -39,7 +39,7 @@ var getBalance = async ((address) => {
 		throw "Error: Address is not valid";
 	}
 
-	var {data} = await (axios.get(`https://api.blockcypher.com/v1/eth/main/addrs/${address}/balance`));
+	let {data} = await (axios.get(`https://api.blockcypher.com/v1/eth/main/addrs/${address}/balance`));
 
 	if (typeof data.balance !== 'undefined') {
 		return data.balance / 1000000000000000000;
