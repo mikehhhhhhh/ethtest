@@ -9,28 +9,27 @@ const app = express();
 
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-	res.render('index');
-});
-
-app.post('/', (req, res) => {
-	getBalance(req.body.address)
-		.then((balance) => {
-			res.render('index', {
-					balance: balance,
-					address: req.body.address
-				}
-			);
-		})
-		.catch((err) => {
-			res.render('index', {
-					error: err,
-					address: req.body.address
-				}
-			);
-		});
+	if (typeof req.query.address !== 'undefined') {
+		getBalance(req.query.address)
+			.then((balance) => {
+				res.render('index', {
+						balance: balance,
+						address: req.query.address
+					}
+				);
+			})
+			.catch((err) => {
+				res.render('index', {
+						error: err,
+						address: req.query.address
+					}
+				);
+			});
+	} else {
+		res.render('index');
+	}
 });
 
 
